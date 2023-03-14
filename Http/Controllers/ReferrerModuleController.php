@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Modules\ReferrerModule\Http\Requests\ReferrerStoreRequest;
 use Modules\ReferrerModule\Http\Requests\ReferrerUpdateRequest;
+use Modules\ReferrerModule\Http\Requests\ReferrerUpdateStatusRequest;
 use Modules\ReferrerModule\Repositories\ReferrerModuleRepository;
 
 class ReferrerModuleController extends Controller
@@ -209,5 +210,41 @@ class ReferrerModuleController extends Controller
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
 
+    }
+
+    public function updateStatus(ReferrerUpdateStatusRequest $request)
+    {
+        try {
+            $id = $request->input('id');
+
+            $data = [
+                'status' => $request->input('status')
+            ];
+
+            $rs = $this->referrer->updateReferral($id, $data);
+
+            if ($rs) {
+                $responseData = [
+                    'status' => true,
+                    'message' => __('referrermodule::messages.referrer.status_updated'),
+                ];
+                return $this->referrer->responseMessage($responseData, Response::HTTP_OK);
+            } else {
+                $responseData = [
+                    'status' => false,
+                    'message' => self::TRYAGAIN,
+                ];
+                return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+            }
+
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            $responseData = [
+                'status' => false,
+                'message' => self::TRYAGAIN,
+            ];
+            return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+        }
     }
 }

@@ -11,4 +11,16 @@ trait ReferrerTraits
     {
         return $this->hasMany(Referral::class);
     }
+
+    public function additionalFillableAttributes()
+    {
+        return [
+            'referrer_id'
+        ];
+    }
+
+    public function getFillable()
+    {
+        return array_merge($this->fillable, $this->additionalFillableAttributes());
+    }
 }

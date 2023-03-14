@@ -17,7 +17,7 @@ use Modules\ReferrerModule\Http\Controllers\ReferrerModuleController;
 
 
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::get('get-referrer-id', [ ReferrerModuleController::class,'getReferrerId'])->name('getReferrerId');
 
@@ -28,5 +28,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('referrers/update/{id}', [ ReferrerModuleController::class,'update'])->name('referrer.update');
 
     Route::delete('referrers/{id}', [ ReferrerModuleController::class,'destroy'])->name('referrer.delete');
+
+    Route::post('update/referrer/status', [ ReferrerModuleController::class,'updateStatus'])
+                                        ->name('referrer.update.status');
 
 });
