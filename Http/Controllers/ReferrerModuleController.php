@@ -51,7 +51,6 @@ class ReferrerModuleController extends Controller
         }
     }
 
-
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -60,7 +59,7 @@ class ReferrerModuleController extends Controller
     public function store(ReferrerStoreRequest $request)
     {
         try {
-            $data =  $this->getData($request);
+            $data = $this->getData($request);
 
             $rs = $this->referrer->saveReferral($data);
 
@@ -91,15 +90,37 @@ class ReferrerModuleController extends Controller
     }
 
     /**
-     * Show the specified resource.
+     * Show user with referrers count.
      * @param int $id
      * @return Renderable
      */
     public function show($id)
     {
-        return view('referrermodule::show');
-    }
+        try {
+            $user = $this->referrer->userFindOrFail($id);
 
+            $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'referrers_count' => $user->referrers_count,
+            ];
+
+            $responseData = [
+                'status' => true,
+                'data' => $data,
+            ];
+
+            return $this->referrer->responseMessage($responseData, Response::HTTP_OK);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            $responseData = [
+                'status' => false,
+                'message' => self::TRYAGAIN,
+            ];
+            return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+        }
+    }
 
     /**
      * Update the specified resource in storage.
@@ -111,7 +132,7 @@ class ReferrerModuleController extends Controller
     {
         try {
 
-            $data =  $this->getData($request);
+            $data = $this->getData($request);
 
             $rs = $this->referrer->updateReferral($id, $data);
 
@@ -141,16 +162,16 @@ class ReferrerModuleController extends Controller
 
     protected function getData($request)
     {
-        $user = $this->referrer->getUserData(['referrer_id'=> $request->input('referred_code')]);
+        $user = $this->referrer->getUserData(['referrer_id' => $request->input('referred_code')]);
 
         return [
             'referrer_name' => $request->input('referrer_name'),
             'referrer_email' => $request->input('referrer_email'),
             'referred_name' => $request->input('referred_name'),
             'referred_email' => $request->input('referred_email'),
-            'referral_code'  => $request->input('referred_code'),
-            'user_id'        => ($user)?$user->id:null,
-            'created_at'     => now()
+            'referral_code' => $request->input('referred_code'),
+            'user_id' => ($user) ? $user->id : null,
+            'created_at' => now(),
         ];
     }
 
@@ -178,8 +199,7 @@ class ReferrerModuleController extends Controller
                 return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
             }
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
 
             $responseData = [

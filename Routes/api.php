@@ -21,6 +21,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::get('get-referrer-id', [ ReferrerModuleController::class,'getReferrerId'])->name('getReferrerId');
 
+    Route::get('user/referrers/{userId}', [ ReferrerModuleController::class,'show'])->name('user.referrers');
+
     Route::post('referrers/store', [ ReferrerModuleController::class,'store'])->name('referrer.save');
 
     Route::put('referrers/update/{id}', [ ReferrerModuleController::class,'update'])->name('referrer.update');

@@ -49,4 +49,11 @@ class ReferrerModuleRepository implements ReferrerModuleInterface
         return Referral::whereId($id)->delete();
     }
 
+    public function userFindOrFail($id)
+    {
+        return User::withCount(['referrers'=> function ($query){
+            $query->where('status', 'approved');
+        }])->FindOrFail($id);
+    }
+
 }

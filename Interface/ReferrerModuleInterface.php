@@ -16,4 +16,6 @@ interface ReferrerModuleInterface
 
     public function deleteReferral($id);
 
+    public function userFindOrFail($id);
+
 }
