@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ReferrerStoreRequest extends FormRequest
+class ReferrerUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -43,7 +43,6 @@ class ReferrerStoreRequest extends FormRequest
     {
         return true;
     }
-
 
     public function failedValidation(Validator $validator)
     {

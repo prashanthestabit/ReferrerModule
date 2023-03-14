@@ -12,4 +12,8 @@ interface ReferrerModuleInterface
 
     public function saveReferral($data);
 
+    public function updateReferral($id, $data);
+
+    public function deleteReferral($id);
+
 }

@@ -9,12 +9,15 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Modules\ReferrerModule\Http\Requests\ReferrerStoreRequest;
+use Modules\ReferrerModule\Http\Requests\ReferrerUpdateRequest;
 use Modules\ReferrerModule\Repositories\ReferrerModuleRepository;
 
 class ReferrerModuleController extends Controller
 {
 
     protected $referrer;
+
+    const TRYAGAIN = 'Sorry!! Try again';
 
     public function __construct(ReferrerModuleRepository $referrer)
     {
@@ -41,7 +44,7 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => __('paymentgatewaymanagement::messages.try_again'),
+                'message' => self::TRYAGAIN,
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
 
@@ -56,33 +59,23 @@ class ReferrerModuleController extends Controller
      */
     public function store(ReferrerStoreRequest $request)
     {
-        try
-        {
-            $userId = $this->referrer->getUserData(['referrer_id'=> $request->input('referral_code')]);
-
-            $data = [
-                'referrer_name' => $request->input('referrer_name'),
-                'referrer_email' => $request->input('referrer_email'),
-                'referred_name' => $request->input('referred_name'),
-                'referred_email' => $request->input('referred_email'),
-                'referral_code'  => $request->input('referral_code'),
-                'user_id'        => $userId,
-                'created_at'     => now()
-            ];
+        try {
+            $data =  $this->getData($request);
 
             $rs = $this->referrer->saveReferral($data);
 
             if ($rs) {
                 $responseData = [
                     'status' => true,
-                    'message' => __('referrermodule::messages.try_again'),
+                    'message' => __('referrermodule::messages.referrer.saved'),
                     'data' => $rs,
                 ];
-                return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+
+                return $this->referrer->responseMessage($responseData, Response::HTTP_OK);
             } else {
                 $responseData = [
                     'status' => false,
-                    'message' => __('referrermodule::messages.try_again'),
+                    'message' => self::TRYAGAIN,
                 ];
                 return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
             }
@@ -91,7 +84,7 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => __('paymentgatewaymanagement::messages.try_again'),
+                'message' => self::TRYAGAIN,
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
@@ -107,15 +100,6 @@ class ReferrerModuleController extends Controller
         return view('referrermodule::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('referrermodule::edit');
-    }
 
     /**
      * Update the specified resource in storage.
@@ -123,9 +107,51 @@ class ReferrerModuleController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(ReferrerUpdateRequest $request, $id)
     {
-        //
+        try {
+
+            $data =  $this->getData($request);
+
+            $rs = $this->referrer->updateReferral($id, $data);
+
+            if ($rs) {
+                $responseData = [
+                    'status' => true,
+                    'message' => __('referrermodule::messages.referrer.updated_success'),
+                ];
+                return $this->referrer->responseMessage($responseData, Response::HTTP_OK);
+            } else {
+                $responseData = [
+                    'status' => false,
+                    'message' => self::TRYAGAIN,
+                ];
+                return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+            }
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            $responseData = [
+                'status' => false,
+                'message' => self::TRYAGAIN,
+            ];
+            return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    protected function getData($request)
+    {
+        $user = $this->referrer->getUserData(['referrer_id'=> $request->input('referred_code')]);
+
+        return [
+            'referrer_name' => $request->input('referrer_name'),
+            'referrer_email' => $request->input('referrer_email'),
+            'referred_name' => $request->input('referred_name'),
+            'referred_email' => $request->input('referred_email'),
+            'referral_code'  => $request->input('referred_code'),
+            'user_id'        => ($user)?$user->id:null,
+            'created_at'     => now()
+        ];
     }
 
     /**
@@ -135,6 +161,33 @@ class ReferrerModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $rs = $this->referrer->deleteReferral($id);
+
+            if ($rs) {
+                $responseData = [
+                    'status' => true,
+                    'message' => __('referrermodule::messages.referrer.delete_success'),
+                ];
+                return $this->referrer->responseMessage($responseData, Response::HTTP_OK);
+            } else {
+                $responseData = [
+                    'status' => false,
+                    'message' => self::TRYAGAIN,
+                ];
+                return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+            }
+
+        } catch (Exception $e)
+        {
+            Log::error($e->getMessage());
+
+            $responseData = [
+                'status' => false,
+                'message' => self::TRYAGAIN,
+            ];
+            return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
+        }
+
     }
 }

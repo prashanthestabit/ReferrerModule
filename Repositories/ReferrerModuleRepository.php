@@ -39,4 +39,14 @@ class ReferrerModuleRepository implements ReferrerModuleInterface
         return Referral::create($data);
     }
 
+    public function updateReferral($id, $data)
+    {
+        return Referral::whereId($id)->update($data);
+    }
+
+    public function deleteReferral($id)
+    {
+        return Referral::whereId($id)->delete();
+    }
+
 }
