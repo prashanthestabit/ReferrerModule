@@ -87,7 +87,8 @@ Request Body:- token (required)
 URL:- /api/referrers/store
 Method:- POST
 Request Body:- token (required),referrer_name (required), referrer_email (required , email)
-referred_name (required, string), referred_email (required , email),referred_code(required, valid)
+referred_name (required, string), referred_email (required , email),
+referred_code(required, valid)
 ```
 
 3. updates an existing referral record in the database
@@ -96,7 +97,8 @@ referred_name (required, string), referred_email (required , email),referred_cod
 URL:- /api/referrers/update/{id}
 Method:- PUT
 Request Body:- token (required),referrer_name (required), referrer_email (required , email)
-referred_name (required, string), referred_email (required , email),referred_code(required, valid)
+referred_name (required, string), referred_email (required , email),
+referred_code(required, valid)
 ```
 
 4. delete a referral record from the database.
