@@ -125,7 +125,7 @@ class ReferrerModuleController extends Controller
     /**
      * updates an existing referral record in the database.
      * @param Request $request
-     * @param int $id
+     * @param referrer int $id
      * @return Response
      */
     public function update(ReferrerUpdateRequest $request, $id)
@@ -135,7 +135,6 @@ class ReferrerModuleController extends Controller
             $data = $this->getData($request);
 
             $rs = $this->referrer->updateReferral($id, $data);
-
             if ($rs) {
                 $responseData = [
                     'status' => true,

@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "16010d64-e685-42f9-90da-16a7115879e1",
+		"name": "ReferrerModule",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26192364"
+	},
+	"item": [
+		{
+			"name": "get-referrer-id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjc4ODc4MDY2LCJleHAiOjE2Nzg4ODE2NjYsIm5iZiI6MTY3ODg3ODA2NiwianRpIjoiMjRXbjV4UnRFRDR3c2ZRTiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.AgnpF-3L0Htr3Ah2A23CiOrPQsEmIOYD75crK3OySN8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/get-referrer-id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"get-referrer-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/referrers/store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjc4ODc4MDY2LCJleHAiOjE2Nzg4ODE2NjYsIm5iZiI6MTY3ODg3ODA2NiwianRpIjoiMjRXbjV4UnRFRDR3c2ZRTiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.AgnpF-3L0Htr3Ah2A23CiOrPQsEmIOYD75crK3OySN8\",\n    \"referrer_name\" : \"Test jsks\",\n    \"referrer_email\" : \"test@gmail.com\",\n    \"referred_name\"  : \"admin\",\n    \"referred_email\" : \"admin@admin.com\",\n    \"referred_code\"  : \"65f9062d-8cbc-4d76-aea1-133336c9ee31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/referrers/store",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"referrers",
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/referrers/update/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjc4ODc4MDY2LCJleHAiOjE2Nzg4ODE2NjYsIm5iZiI6MTY3ODg3ODA2NiwianRpIjoiMjRXbjV4UnRFRDR3c2ZRTiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.AgnpF-3L0Htr3Ah2A23CiOrPQsEmIOYD75crK3OySN8\",\n    \"referrer_name\" : \"Test Pandey s\",\n    \"referrer_email\" : \"test@gmail.com\",\n    \"referred_name\"  : \"admin\",\n    \"referred_email\" : \"admin@admin.com\",\n    \"referred_code\"  : \"65f9062d-8cbc-4d76-aea1-133336c9ee31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/referrers/update/395",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"referrers",
+						"update",
+						"395"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/referrers/2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjc4NzkxNzM5LCJleHAiOjE2Nzg3OTUzMzksIm5iZiI6MTY3ODc5MTczOSwianRpIjoiSGpTaE0xOU9hejdFcExMRiIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.qSvP--EvS5QSleJo7jFmIi4drJwXHPC8u4glQvkyVBs\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/referrers/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"referrers",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/user/referrers/2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjc4Nzk1MzU0LCJleHAiOjE2Nzg3OTg5NTQsIm5iZiI6MTY3ODc5NTM1NCwianRpIjoiMjhackE0WEhuZ3lqd3g4ViIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.w7xQfrTDTrIamjael8Ao7L-TgehjMbW9V55g3WZDejc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/referrers/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"referrers",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/update/referrer/status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjc4Nzk5ODg0LCJleHAiOjE2Nzg4MDM0ODQsIm5iZiI6MTY3ODc5OTg4NCwianRpIjoic1VPVnR2TmhZSlJYeVg0ZSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.lUiRObGywJ8KfWExqOLIN38VMj3U6Et9ddQgH7aIrdk\",\n    \"id\" : 1,\n    \"status\" : \"approved\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/update/referrer/status",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"update",
+						"referrer",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

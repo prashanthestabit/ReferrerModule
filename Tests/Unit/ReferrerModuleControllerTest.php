@@ -12,7 +12,7 @@ use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
- * php artisan test Modules/ReferrerModule/Tests/Unit/ReferrerModuleControllerTest.php
+ * ReferrerModuleControllerTest
  *
  */
 class ReferrerModuleControllerTest extends TestCase
