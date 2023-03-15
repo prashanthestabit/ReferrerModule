@@ -41,7 +41,7 @@ Tip: don't forget to run
 php artisan module:enable ReferrerModule
 ```
 
-Step 2:- install JWT Authentication - for installation read https://jwt-auth.readthedocs.io/en/develop/
+Step 2:- install JWT Authentication - for installation read [official documentation](https://jwt-auth.readthedocs.io/en/develop/)
 
 Step 3:- Run php artisan migrate
 
