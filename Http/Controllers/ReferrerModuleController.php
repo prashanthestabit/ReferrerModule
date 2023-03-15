@@ -18,7 +18,7 @@ class ReferrerModuleController extends Controller
 
     protected $referrer;
 
-    const TRYAGAIN = 'Sorry!! Try again';
+    const TRYAGAIN = 'referrermodule::messages.try_again';
 
     public function __construct(ReferrerModuleRepository $referrer)
     {
@@ -26,12 +26,11 @@ class ReferrerModuleController extends Controller
     }
 
     /**
-     * get Referrer Id from user table
+     * retrieves the referral ID associated with the currently authenticated user.
      */
     public function getReferrerId()
     {
-        try
-        {
+        try {
             $referrerId = $this->referrer->getUserField(auth()->user()->id, 'referrer_id');
 
             $responseData = [
@@ -45,7 +44,7 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => self::TRYAGAIN,
+                'message' => __(self::TRYAGAIN),
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
 
@@ -53,9 +52,9 @@ class ReferrerModuleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * creates a new referral record in the database
      * @param Request $request
-     * @return Renderable
+     * @return Response
      */
     public function store(ReferrerStoreRequest $request)
     {
@@ -75,7 +74,7 @@ class ReferrerModuleController extends Controller
             } else {
                 $responseData = [
                     'status' => false,
-                    'message' => self::TRYAGAIN,
+                    'message' => __(self::TRYAGAIN),
                 ];
                 return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
             }
@@ -84,16 +83,16 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => self::TRYAGAIN,
+                'message' => __(self::TRYAGAIN),
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
     }
 
     /**
-     * Show user with referrers count.
+     * retrieves information about a user and the number of referrals they have made.
      * @param int $id
-     * @return Renderable
+     * @return Response
      */
     public function show($id)
     {
@@ -117,17 +116,17 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => self::TRYAGAIN,
+                'message' => __(self::TRYAGAIN),
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
     }
 
     /**
-     * Update the specified resource in storage.
+     * updates an existing referral record in the database.
      * @param Request $request
      * @param int $id
-     * @return Renderable
+     * @return Response
      */
     public function update(ReferrerUpdateRequest $request, $id)
     {
@@ -146,7 +145,7 @@ class ReferrerModuleController extends Controller
             } else {
                 $responseData = [
                     'status' => false,
-                    'message' => self::TRYAGAIN,
+                    'message' => __(self::TRYAGAIN),
                 ];
                 return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
             }
@@ -155,7 +154,7 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => self::TRYAGAIN,
+                'message' => __(self::TRYAGAIN),
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
@@ -177,7 +176,7 @@ class ReferrerModuleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * deletes a referral record from the database.
      * @param int $id
      * @return Renderable
      */
@@ -195,7 +194,7 @@ class ReferrerModuleController extends Controller
             } else {
                 $responseData = [
                     'status' => false,
-                    'message' => self::TRYAGAIN,
+                    'message' => __(self::TRYAGAIN),
                 ];
                 return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
             }
@@ -205,13 +204,16 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => self::TRYAGAIN,
+                'message' => __(self::TRYAGAIN),
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
 
     }
 
+    /**
+     * update a referral status from the database
+     */
     public function updateStatus(ReferrerUpdateStatusRequest $request)
     {
         try {
@@ -232,7 +234,7 @@ class ReferrerModuleController extends Controller
             } else {
                 $responseData = [
                     'status' => false,
-                    'message' => self::TRYAGAIN,
+                    'message' => __(self::TRYAGAIN),
                 ];
                 return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
             }
@@ -242,7 +244,7 @@ class ReferrerModuleController extends Controller
 
             $responseData = [
                 'status' => false,
-                'message' => self::TRYAGAIN,
+                'message' => __(self::TRYAGAIN),
             ];
             return $this->referrer->responseMessage($responseData, Response::HTTP_BAD_REQUEST);
         }
