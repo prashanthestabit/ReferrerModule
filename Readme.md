@@ -4,12 +4,12 @@ If you think to create a referral module. don't think, just clone and use. the R
 
 # Requirement
 
-Laravel freamwork -nWidart/laravel-modules package, php 7.2 or higher. for setup nWiart read on official site 
-https://nwidart.com/laravel-modules/v6/introduction
+1. Laravel framework
+2. nWidart/laravel-modules package
+3. PHP 7.2 or higher
+4. JWT Authentication
 
-# Tip
-For this Referral Module we are using the JWT Authentication . for setup jwt read on official site
-https://jwt-auth.readthedocs.io/en/develop/
+For setting up nWidart/laravel-modules package, please refer to the [official website](https://nwidart.com/laravel-modules/v6/introduction). For setting up JWT Authentication, please refer to the [official documentation](https://jwt-auth.readthedocs.io/en/develop/).
 
 ## Steps to use this module
 
